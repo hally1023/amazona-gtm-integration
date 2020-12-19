@@ -175,7 +175,6 @@ export default function OrderScreen(props) {
                         amount={order.totalPrice}
                         onSuccess={successPaymentHandler}
                       ></PayPalButton>
-                     
                     </>
                   )}
                 </li>
