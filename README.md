@@ -206,3 +206,31 @@
 34. Update User Profile
     1. create user update api
     2. update user info
+35. Create Admin View
+    1. Create Admin Menu
+    2. Create Admin Middleware in Backend
+    3. Create Admin Route in Frontend
+36. List Products
+    1. Create Product List Screen
+    2. Add reducer to store
+    3. show products on the screen
+37. Create Product
+    1. build create product api
+    2. build Create Product button
+    3. define product create constant, action and reducer
+    4. use action in Product List Screen
+38. Build Product Edit Screen
+    1. create edit screen
+    2. define state
+    3. create fields
+    4. load product details
+    5.  add to routes
+39. Update Product
+    1. define update api
+    2. define product update constant, action and reducer
+    3. use action in Product Edit Screen
+40. Upload Product Image
+    1. npm install multer
+    7. define upload router
+    8. create uploads folder 
+    9. Handle frontend
