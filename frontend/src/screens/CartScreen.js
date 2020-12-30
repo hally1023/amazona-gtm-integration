@@ -50,7 +50,7 @@ export default function CartScreen(props) {
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </div>
                   <div>
-                    <select
+                    <select id="dropdownMenu"
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(

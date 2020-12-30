@@ -81,7 +81,7 @@ export default function ProductScreen(props) {
                         <div className="row">
                           <div>Qty</div>
                           <div>
-                            <select
+                            <select id="dropdownMenu"
                               value={qty}
                               onChange={(e) => setQty(e.target.value)}
                             >
@@ -98,7 +98,6 @@ export default function ProductScreen(props) {
                       </li>
                       <li>
                         <button
-                          id="addToCart"
                           onClick={addToCartHandler}
                           className="primary block"
                         >
