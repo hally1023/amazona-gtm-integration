@@ -131,8 +131,10 @@ export default function OrderScreen(props) {
                             className="small"
                           ></img>
                         </div>
-                        <div className="min-30" id="productName">
-                          <Link to={`/product/${item.product}`}>{item.name}</Link>
+                        <div className="min-30">
+                          <Link to={`/product/${item.product}`}>
+                            {item.name}
+                          </Link>
                         </div>
 
                         <div>

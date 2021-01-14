@@ -81,7 +81,7 @@ export default function ProductScreen(props) {
                         <div className="row">
                           <div>Qty</div>
                           <div>
-                            <select id="dropdownMenu"
+                            <select
                               value={qty}
                               onChange={(e) => setQty(e.target.value)}
                             >
