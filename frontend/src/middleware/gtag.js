@@ -86,20 +86,20 @@ export const gtagMiddleware = (store) => (next) => (action) => {
 
       return next(action);
 
-      case ORDER_CREATE_SUCCESS:
-        event({
-          eventName: "purchase",
-          details: {
-            "transaction_id": action.payload._id,
-            "value": action.payload.itemsPrice,
-            "currency": "USD",
-            "tax": action.payload.taxPrice,
-            "shipping": action.payload.shippingPrice,
-            items: cartItems.map((item) => mapCartItemToGtag(item)),
-          },
-        });
-        
-        return next(action);
+    case ORDER_CREATE_SUCCESS:
+      event({
+        eventName: "purchase",
+        details: {
+          transaction_id: action.payload._id,
+          value: action.payload.itemsPrice,
+          currency: "USD",
+          tax: action.payload.taxPrice,
+          shipping: action.payload.shippingPrice,
+          items: cartItems.map((item) => mapCartItemToGtag(item)),
+        },
+      });
+
+      return next(action);
 
     default:
       next(action);
