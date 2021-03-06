@@ -19,6 +19,7 @@ $ cd paid-hally-amazona
 - Create .env file and copy and paste these codes:
   - JWT_SECRET=somethingsecret
   - PAYPAL_CLIENT_ID=<insert your paypal client id here>
+  - MONGODB_URL=<insert url for mongodb>
 - Here are instructions how to generate PayPal client ID: https://www.appinvoice.com/en/s/documentation/how-to-get-paypal-client-id-and-secret-key-22
 
 ### 3. Run Backend
@@ -53,9 +54,9 @@ $ npm start
 
 ### 7. Seed Users and Products
 
-- Run this on chrome: http://localhost:5000/api/users
-- It returns admin email and password
-- Run this on chrome: http://localhost:5000/api/products
+- Run this on chrome: http://localhost:5000/api/users/seed
+- It seeds users. Check email and password in data.js
+- Run this on chrome: http://localhost:5000/api/products/seed
 - It creates 6 sample products
 
 ### 6. Admin Login
