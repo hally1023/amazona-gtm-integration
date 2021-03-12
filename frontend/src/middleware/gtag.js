@@ -14,6 +14,15 @@ export const event = ({ eventName, details }) => {
   window.gtag("event", eventName, details);
 };
 
+export function trackPageView() {
+  event({
+    eventName: "page_view",
+    details: {
+      page_path: window.location.pathname,
+    },
+  });
+}
+
 export const gtagMiddleware = (store) => (next) => (action) => {
   const { getState } = store;
 
