@@ -3,7 +3,12 @@ import { PayPalButton } from 'react-paypal-button-v2';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deliverOrder, detailsOrder, payOrder } from '../actions/orderActions';
+import {
+  deliverOrder,
+  detailsOrder,
+  payOrder,
+  refundOrder,
+} from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {
@@ -36,9 +41,9 @@ export default function OrderScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     const addPayPalScript = async () => {
-      const { data } = await Axios.get('/api/config/paypal');
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
+      const { data } = await Axios.get("/api/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
       script.async = true;
       script.onload = () => {
@@ -73,6 +78,10 @@ export default function OrderScreen(props) {
     dispatch(deliverOrder(order._id));
   };
 
+  const refundHandler = () => {
+    dispatch(refundOrder(order._id));
+  };
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -89,7 +98,7 @@ export default function OrderScreen(props) {
                 <p>
                   <strong>Name:</strong> {order.shippingAddress.fullName} <br />
                   <strong>Address: </strong> {order.shippingAddress.address},
-                  {order.shippingAddress.city},{' '}
+                  {order.shippingAddress.city},{" "}
                   {order.shippingAddress.postalCode},
                   {order.shippingAddress.country}
                 </p>
@@ -201,7 +210,7 @@ export default function OrderScreen(props) {
                   )}
                 </li>
               )}
-              
+
               {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
@@ -218,6 +227,15 @@ export default function OrderScreen(props) {
                 </li>
               )}
 
+              {order.isPaid && (
+                <button
+                  type="button"
+                  className="primary block"
+                  onClick={refundHandler}
+                >
+                  Refund
+                </button>
+              )}
             </ul>
           </div>
         </div>
