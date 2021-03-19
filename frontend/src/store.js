@@ -1,7 +1,6 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { gtagMiddleware } from './middleware/gtag';
-import { gtmMiddleware } from './middleware/gtm';
 import { cartReducer } from './reducers/cartReducers';
 import {
   orderCreateReducer,
@@ -67,7 +66,7 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
   initialState,
-  composeEnhancer(applyMiddleware(thunk, gtmMiddleware))
+  composeEnhancer(applyMiddleware(thunk, gtagMiddleware))
 );
 
 export default store;

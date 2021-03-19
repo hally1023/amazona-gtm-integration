@@ -18,6 +18,7 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import { trackPageView } from './middleware/gtag';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -25,10 +26,16 @@ function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
   };
+
+  useEffect(() => {
+    trackPageView();
+    history.listen(trackPageView);
+  }, [history]);
 
   return (
     <div className="grid-container">
