@@ -4,7 +4,7 @@ import {
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
 } from "../constants/cartConstants";
-import { ORDER_DELIVER_SUCCESS, ORDER_PAY_SUCCESS, ORDER_REFUND } from "../constants/orderConstants";
+import { ORDER_DELIVER_SUCCESS, ORDER_PAY_SUCCESS, ORDER_REFUND_SUCCESS } from "../constants/orderConstants";
 import {
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_LIST_SUCCESS,
@@ -128,7 +128,7 @@ export const gtagMiddleware = (store) => (next) => (action) => {
 
       return next(action);
 
-    case ORDER_REFUND:
+    case ORDER_REFUND_SUCCESS:
       event({
         eventName: "refund",
         details: {

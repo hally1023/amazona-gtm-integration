@@ -11,6 +11,7 @@ import {
   orderListReducer,
   orderMineListReducer,
   orderPayReducer,
+  orderRefundReducer,
 } from './reducers/orderReducers';
 import {
   productCreateReducer,
@@ -60,6 +61,7 @@ const reducer = combineReducers({
   orderList: orderListReducer,
   orderDelete: orderDeleteReducer,
   orderDeliver: orderDeliverReducer,
+  orderRefund: orderRefundReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

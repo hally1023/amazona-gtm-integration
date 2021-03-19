@@ -227,7 +227,7 @@ export default function OrderScreen(props) {
                 </li>
               )}
 
-              {order.isPaid && (
+              {order.isPaid && !order.isRefunded && (
                 <button
                   type="button"
                   className="primary block"

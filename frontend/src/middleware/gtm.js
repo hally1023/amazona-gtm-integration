@@ -11,7 +11,7 @@ import {
 import {
   ORDER_DELIVER_SUCCESS,
   ORDER_PAY_SUCCESS,
-  ORDER_REFUND,
+  ORDER_REFUND_SUCCESS,
 } from "../constants/orderConstants";
 
 export const dataLayer = window.dataLayer;
@@ -126,7 +126,7 @@ export const gtmMiddleware = (store) => (next) => (action) => {
 
       return next(action);
 
-    case ORDER_REFUND:
+    case ORDER_REFUND_SUCCESS:
       dataLayer.push({
         'ecommerce': {
           'refund': {
