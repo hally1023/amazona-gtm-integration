@@ -14,6 +14,7 @@ import MessageBox from '../components/MessageBox';
 import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
+  ORDER_REFUND_RESET,
 } from '../constants/orderConstants';
 
 export default function OrderScreen(props) {
@@ -32,11 +33,17 @@ export default function OrderScreen(props) {
   } = orderPay;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
+  const orderRefund = useSelector((state) => state.orderRefund);
   const {
     loading: loadingDeliver,
     error: errorDeliver,
     success: successDeliver,
   } = orderDeliver;
+
+
+  const {
+    success: successRefund,
+  } = orderRefund;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -55,10 +62,12 @@ export default function OrderScreen(props) {
       !order ||
       successPay ||
       successDeliver ||
+      successRefund ||
       (order && order._id !== orderId)
     ) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch({ type: ORDER_REFUND_RESET });
       dispatch(detailsOrder(orderId));
     } else {
       if (!order.isPaid) {
@@ -71,15 +80,18 @@ export default function OrderScreen(props) {
     }
   }, [dispatch, order, orderId, sdkReady, successPay, successDeliver]);
 
-  const successPaymentHandler = (paymentResult) => {
-    dispatch(payOrder(order, paymentResult));
+  const successPaymentHandler = async (paymentResult) => {
+    await dispatch(await payOrder(order, paymentResult));
+    props.history.push(`/thank-you/${orderId}`)
   };
-  const deliverHandler = () => {
-    dispatch(deliverOrder(order._id));
+  const deliverHandler = async () => {
+    await dispatch(await deliverOrder(order._id));
+    props.history.push(`/order-complete/${orderId}`)
   };
 
-  const refundHandler = () => {
-    dispatch(refundOrder(order._id));
+  const refundHandler = async () => {
+    await dispatch(await refundOrder(order._id));
+    props.history.push(`/refund-order/${orderId}`)
   };
 
   return loading ? (

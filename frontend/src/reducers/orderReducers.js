@@ -27,6 +27,7 @@ import {
   ORDER_REFUND_REQUEST,
   ORDER_REFUND_SUCCESS,
   ORDER_REFUND_FAIL,
+  ORDER_REFUND_RESET,
 } from '../constants/orderConstants';
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -134,6 +135,8 @@ export const orderRefundReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case ORDER_REFUND_FAIL:
       return { loading: false, error: action.payload };
+    case ORDER_REFUND_RESET:
+      return {};
     default:
       return state;
   }
