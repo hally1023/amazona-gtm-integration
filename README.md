@@ -3,15 +3,15 @@
 
 ## Demo Website
 
-- 👉 Heroku : [https://hally-amazona-app.herokuapp.com/](https://hally-amazona-app.herokuapp.com/)
+- 👉 Heroku : [https://amazona-react-gtag.herokuapp.com/](https://amazona-react-gtag.herokuapp.com/)
 
 ## Run Locally
 
 ### 1. Clone Repo
 
 ```
-$ git clone git@github.com:hally1023/paid-hally-amazona.git
-$ cd paid-hally-amazona
+$ git clone git@github.com:hally1023/amazona-react-gtag-integration.git
+$ cd amazona-react-gtag-integration
 ```
 
 ### 2. At Root Folder
