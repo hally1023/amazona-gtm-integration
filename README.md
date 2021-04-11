@@ -3,15 +3,15 @@
 
 ## Demo Website
 
-- 👉 Heroku : [https://amazona-react-gtag.herokuapp.com/](https://amazona-react-gtag.herokuapp.com/)
+- 👉 Heroku : [https://amazona-react-gtm.herokuapp.com/](https://amazona-react-gtm.herokuapp.com/)
 
 ## Run Locally
 
 ### 1. Clone Repo
 
 ```
-$ git clone git@github.com:hally1023/amazona-react-gtag-integration.git
-$ cd amazona-react-gtag-integration
+$ git clone git@github.com:hally1023/amazona-react-gtm.git
+$ cd amazona-react-gtm
 ```
 
 ### 2. At Root Folder
