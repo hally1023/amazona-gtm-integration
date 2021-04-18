@@ -1,4 +1,4 @@
-# Amazona E-Commerce Website
+# Amazona ECommerce Website
 ![hally-amazona](/template/images/hally-amazona.jpg)
 
 ## Demo Website
