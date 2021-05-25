@@ -4,7 +4,7 @@ import {
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
 } from "../constants/cartConstants";
-import { ORDER_CREATE_SUCCESS } from "../constants/orderConstants";
+import { ORDER_DELIVER_SUCCESS, ORDER_PAY_SUCCESS, ORDER_REFUND_SUCCESS } from "../constants/orderConstants";
 import {
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_LIST_SUCCESS,
@@ -14,10 +14,22 @@ export const event = ({ eventName, details }) => {
   window.gtag("event", eventName, details);
 };
 
+export function trackPageView() {
+  event({
+    eventName: "page_view",
+    details: {
+      page_path: window.location.pathname,
+    },
+  });
+}
+
 export const gtagMiddleware = (store) => (next) => (action) => {
   const { getState } = store;
 
   const cartItems = getState().cart.cartItems;
+  const order = getState().orderDetails?.order
+
+
   switch (action.type) {
     case PRODUCT_LIST_SUCCESS:
       event({
@@ -86,16 +98,46 @@ export const gtagMiddleware = (store) => (next) => (action) => {
 
       return next(action);
 
-    case ORDER_CREATE_SUCCESS:
+    case ORDER_PAY_SUCCESS:
       event({
         eventName: "purchase",
         details: {
-          transaction_id: action.payload._id,
-          value: action.payload.itemsPrice,
+          transaction_id: order._id,
+          value: order.itemsPrice,
           currency: "USD",
-          tax: action.payload.taxPrice,
-          shipping: action.payload.shippingPrice,
-          items: cartItems.map((item) => mapCartItemToGtag(item)),
+          tax: order.taxPrice,
+          shipping: order.shippingPrice,
+          items: order.orderItems.map((item) => mapCartItemToGtag(item)),
+        },
+      });
+
+      return next(action);
+
+    case ORDER_DELIVER_SUCCESS:
+      event({
+        eventName: "order_delivered",
+        details: {
+          transaction_id: order._id,
+          value: order.itemsPrice,
+          currency: "USD",
+          tax: order.taxPrice,
+          shipping: order.shippingPrice,
+          items: order.orderItems.map((item) => mapCartItemToGtag(item)),
+        },
+      });
+
+      return next(action);
+
+    case ORDER_REFUND_SUCCESS:
+      event({
+        eventName: "refund",
+        details: {
+          transaction_id: order._id,
+          value: order.itemsPrice,
+          currency: "USD",
+          tax: order.taxPrice,
+          shipping: order.shippingPrice,
+          items: order.orderItems.map((item) => mapCartItemToGtag(item)),
         },
       });
 

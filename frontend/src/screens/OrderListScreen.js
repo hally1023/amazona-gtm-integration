@@ -48,6 +48,7 @@ export default function OrderListScreen(props) {
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
+              <th>REFUNDED</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
@@ -62,6 +63,11 @@ export default function OrderListScreen(props) {
                 <td>
                   {order.isDelivered
                     ? order.deliveredAt.substring(0, 10)
+                    : 'No'}
+                </td>
+                <td>
+                  {order?.isRefunded
+                    ? order.refundedAt.substring(0, 10)
                     : 'No'}
                 </td>
                 <td>
