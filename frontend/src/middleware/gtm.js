@@ -25,6 +25,7 @@ export const gtmMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case PRODUCT_LIST_SUCCESS:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
         ecommerce: {
           currencyCode, // Local currency is optional.
@@ -36,6 +37,7 @@ export const gtmMiddleware = (store) => (next) => (action) => {
       return next(action);
 
     case PRODUCT_DETAILS_SUCCESS:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
         ecommerce: {
           detail: {
@@ -47,6 +49,7 @@ export const gtmMiddleware = (store) => (next) => (action) => {
       return next(action);
 
     case CART_ADD_ITEM:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
         event: "addToCart",
         ecommerce: {
@@ -59,6 +62,7 @@ export const gtmMiddleware = (store) => (next) => (action) => {
 
       return next(action);
     case CART_REMOVE_ITEM:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
         event: "removeFromCart",
         ecommerce: {
@@ -72,6 +76,7 @@ export const gtmMiddleware = (store) => (next) => (action) => {
       return next(action);
 
     case CART_SAVE_SHIPPING_ADDRESS:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
         event: "checkout",
         ecommerce: {
@@ -84,6 +89,7 @@ export const gtmMiddleware = (store) => (next) => (action) => {
       return next(action);
 
     case CART_SAVE_PAYMENT_METHOD:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
         event: "checkoutOption",
         ecommerce: {
@@ -96,6 +102,7 @@ export const gtmMiddleware = (store) => (next) => (action) => {
       return next(action);
 
     case ORDER_PAY_SUCCESS:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
         ecommerce: {
           purchase: {
@@ -116,24 +123,26 @@ export const gtmMiddleware = (store) => (next) => (action) => {
       return next(action);
 
     case ORDER_DELIVER_SUCCESS:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
-        'ecommerce': {
-          'order_delivered': {
-            'actionField': { 'id': order._id }         // Transaction ID. Required for purchases and refunds.
-          }
-        }
-      })
+        ecommerce: {
+          order_delivered: {
+            actionField: { id: order._id }, // Transaction ID. Required for purchases and refunds.
+          },
+        },
+      });
 
       return next(action);
 
     case ORDER_REFUND_SUCCESS:
+      dataLayer.push({ ecommerce: null });
       dataLayer.push({
-        'ecommerce': {
-          'refund': {
-            'actionField': { 'id': order._id }         // Transaction ID. Required for purchases and refunds.
-          }
-        }
-      })
+        ecommerce: {
+          refund: {
+            actionField: { id: order._id }, // Transaction ID. Required for purchases and refunds.
+          },
+        },
+      });
 
       return next(action);
 
